@@ -55,39 +55,22 @@
             <div id="Graph11">
             </div>
             <div id="Graph12">
+
             </div>
         </div>
     </div>
     
 <script>
     $(function () {
-
-        $("#interval").on("change", function () {
-            // ajax call
-            console.log("changetrigger")
-            // load smoothly without refresh
-            // vanilla js ajax call is very wordy
-
-            // specify url first
-            loadGrid();
-        });
         loadGrid();
 
-        $("#interval").on("change", function () {
-            var interval = $(this).val();
+        $("#Interval").on("change", function () {
+            loadGrid();
 
+            var interval = $(this).val();
 
             switch (interval) {
                 case "5MIN":
-
-                    // so in 5 min for the interval case
-
-                    // for loop to popualte start min and end min by 5 min s i %5 == 0
-                    // use jqery to find how to change options in dropdown
-                    // build html stirng of options and ue %startmin.html
-                    console.log(interval);
-
-
                     $("#lbl-end-mins").show();
                     $("#lbl-end-hours").show();
                     $("#end-mins").show();
@@ -99,8 +82,6 @@
                     $("#start-hours").show();
                     break;
                 case "15MIN":
-                    // for loop to popualte start min and end min by 15 min s i %15 == 0
-
                     $("#lbl-end-mins").show();
                     $("#lbl-end-hours").show();
                     $("#end-mins").show();
@@ -122,54 +103,34 @@
                     $("#end-mins").hide();
                     $("#end-hours").hide();
                     break;
-
             }
         });
-
-        // triggering change event on load
-
-
-
-        const startDate = document.querySelector('#startDate');
-        const endDate = document.querySelector('#endDate');
-        const purpose = document.querySelector('#purpose');
-
-
+        
+        const startDate = document.querySelector('#StartDate');
+        const endDate = document.querySelector('#EndDate');
+        const purpose = document.querySelector('#Purpose');
+        
         purpose.addEventListener('change', (event) => {
-
             loadGrid();
         });
 
         startDate.addEventListener('change', (event) => {
-
-            console.log("inside startdatechange");
             loadGrid();
 
         });
         endDate.addEventListener('change', (event) => {
-
-            console.log("inside enddatechange");
             loadGrid();
         });
-
-
-
-        // get varialbes tlike totalminutes or datediff from controller to here somehow
-
     });
 
     function loadGrid() {
-        // wrapper fucniton . fi want diffreent title need to treat grids as component
-        var purpose = $("#purpose").val();
+        var purpose = $("#Purpose").val();
         console.log({ purpose: purpose });
         switch (purpose) {
             case "Price":
-
-
                 $(".charts-parent").show();
                 $(".charts-parent-lse").hide();
-
-
+                
                 getData("URL HERE", "container", "#chart-container1", "#option1-container", true);
                 getData("URL HERE", "carData", "#chart-container", "#Graph1", false);
                 getData("URL HERE", "chartTitle2", "#chart-container2", "#Graph2", false);
@@ -177,72 +138,44 @@
                 getData("URL HERE", "chartTitle4", "#chart-container4", "#Graph4", false);
                 getData("URL HERE", "chartTitle5", "#chart-container5", "#Graph5", false);
                 getData("URL HERE", "chartTitle6", "#chart-container6", "#Graph6", true);
-                //getdata passes all the stuff we want for our charts into hc and loadchart action
 
                 break;
             case "LSELoad":
 
                 $(".charts-parent").hide();
                 $(".charts-parent-lse").show();
-
-
-
+                
                 getData("URL HERE", "chartTitle7", "#chart-container7", "#Graph7", false);
                 getData("URL HERE", "chartTitle8", "#chart-container8", "#Graph8", false);
                 getData("URL HERE", "chartTitle9", "#chart-container9", "#Graph9", false);
                 getData("URL HERE", "chartTitle10", "#chart-container10", "#Graph10", false);
                 getData("URL HERE", "chartTitle11", "#chart-container11", "#Graph11", false);
                 getData("URL HERE", "chartTitle12", "#chart-container12", "#Graph12", true);
-
-
                 break;
         }
 
     }
-    // made get data more generic ge data from diffreernt endpoints
-    // getting data andl oadign chart at once pass in chart id create unique cahrt id everytime get data is called
-    // if same chartid could be issues pass in id as chart id thats why added to grpah mdoel
-
+  
     function getData(url, chartTitle, chartId, chartContainerId, showXAxis) {
         $.ajax({
-            // this fucnion gets the data from any action
-
             url: url,
-
-            // define the url in a better way
-
             contentType: "application/html; charset=utf-8",
-            //passing back entire partial view usually will be application/json
-            type: "GET",
-            dataType: "html",
+            type: "POST",
+            dataType: "json",
             data: {
-                //sends all of this
-
                 freqopt: $("#interval").val(),
                 dataContent: $("#purpose").val(),
                 startDate: $("#startDate").val(),
                 endDate: $("#endDate").val(),
                 chartId: chartId,
-                //created here set at bottom of loadchart action in hc from
-                //GrahModel class object and the variable values it gets set from
-                //the partial view html + index.cshtml id logic and hc logic
-
                 chartTitle: chartTitle,
                 showXAxis: showXAxis
-                //last 2 set in getdata call
-
             }
-
-
-        }).done(function (data) {
+        }).done(function(data) {
             $(chartContainerId).html(data);
-
-            //post has a body
-            // puts the partial in this div
-
-        })
+        });
     }
-    </script>
+</script>
 </asp:Content>
 
 

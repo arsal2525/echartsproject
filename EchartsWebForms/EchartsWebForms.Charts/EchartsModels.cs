@@ -19,62 +19,62 @@ namespace EchartsWebForms.Charts
             bool showXAxis)
         {
             // remeberm to instanitaie each object 
-            var model = new EChartsRoot();
+           
             //our model variable is our object for the echartroot class in chartdatamodel
-            model.series = new List<Series>();
-            model.xAxis = new List<XAxis>();
-            model.yAxis = new List<YAxis>();
-            model.dataZoom = new List<DataZoom>();
+            this.series = new List<Series>();
+            this.xAxis = new List<XAxis>();
+            this.yAxis = new List<YAxis>();
+            this.dataZoom = new List<DataZoom>();
 
             // desginer pattern builder pattern creating an object
-            model.grid = new Grid();
+            this.grid = new Grid();
 
-            model.color = new List<string>();
-            model.color.Add("#80FFA5");
-            model.color.Add("#00DDFF");
-            model.color.Add("#37A2FF");
-            model.color.Add("#FF0087");
-            model.color.Add("#80FFA5");
-            model.color.Add("#FFBF00");
+            this.color = new List<string>();
+            this.color.Add("#80FFA5");
+            this.color.Add("#00DDFF");
+            this.color.Add("#37A2FF");
+            this.color.Add("#FF0087");
+            this.color.Add("#80FFA5");
+            this.color.Add("#FFBF00");
 
-            model.toolbox = new Toolbox();
+            this.toolbox = new Toolbox();
           
-            model.tooltip = new Tooltip();
-            model.tooltip.trigger = "none";
-            model.tooltip.axisPointer = new AxisPointer();
-            model.tooltip.axisPointer.type = "cross";
-            model.tooltip.axisPointer.label = new Label();
-            model.tooltip.axisPointer.label.backgroundColor = "#6a7985";
+            this.tooltip = new Tooltip();
+            this.tooltip.trigger = "none";
+            this.tooltip.axisPointer = new AxisPointer();
+            this.tooltip.axisPointer.type = "cross";
+            this.tooltip.axisPointer.label = new Label();
+            this.tooltip.axisPointer.label.backgroundColor = "#6a7985";
 
-            model.title = new Title();
-            model.title.text = chartTitle;
+            this.title = new Title();
+            this.title.text = chartTitle;
             // made it felxible when calling loadchart till pass the title in
 
-            model.toolbox.itemSize = 10;
-            model.toolbox.feature = new Feature();
-            model.toolbox.feature.dataZoom = new DataZoom();
-            model.toolbox.feature.restore = new Restore();
-            //model.toolbox.feature.dataView = new DataView();
-            model.toolbox.feature.magicType = new MagicType();
-            model.toolbox.feature.saveAsImage = new SaveAsImage();
+            this.toolbox.itemSize = 10;
+            this.toolbox.feature = new Feature();
+            this.toolbox.feature.dataZoom = new DataZoom();
+            this.toolbox.feature.restore = new Restore();
+            //this.toolbox.feature.dataView = new DataView();
+            this.toolbox.feature.magicType = new MagicType();
+            this.toolbox.feature.saveAsImage = new SaveAsImage();
 
-            model.toolbox.feature.dataZoom.yAxisIndex = "none";
-            model.toolbox.feature.dataZoom.show = false;
-            model.toolbox.feature.dataZoom.filterMode = "filter";
-            //model.toolbox.feature.dataView.readOnly = false;
-            model.toolbox.feature.magicType.type = new List<string>();
+            this.toolbox.feature.dataZoom.yAxisIndex = "none";
+            this.toolbox.feature.dataZoom.show = false;
+            this.toolbox.feature.dataZoom.filterMode = "filter";
+            //this.toolbox.feature.dataView.readOnly = false;
+            this.toolbox.feature.magicType.type = new List<string>();
 
-            model.toolbox.feature.magicType.type.Add("line");
-            model.toolbox.feature.magicType.type.Add("bar");
+            this.toolbox.feature.magicType.type.Add("line");
+            this.toolbox.feature.magicType.type.Add("bar");
 
             //{ } in the echarts lib meant its an object so would instiate a new thing for that
             //[] meant it was an array so would just set the value of the property
 
-            model.grid.left = "3%";
-            model.grid.right = "4%";
-            model.grid.bottom = "3%";
-            model.grid.top = "25%";
-            model.grid.containLabel = true;
+            this.grid.left = "3%";
+            this.grid.right = "4%";
+            this.grid.bottom = "3%";
+            this.grid.top = "25%";
+            this.grid.containLabel = true;
 
             var xAxisDaily = new List<string>();
             var xAxisMonthly = new List<string>();
@@ -90,9 +90,9 @@ namespace EchartsWebForms.Charts
             {
                 case "5MIN":
 
-                    model.dataZoom.Add(new DataZoom { type = "inside", start = 0, end = 5, zoomOnMouseWheel = "ctrl" });
+                    this.dataZoom.Add(new DataZoom { type = "inside", start = 0, end = 5, zoomOnMouseWheel = "ctrl" });
 
-                    model.dataZoom.Add(new DataZoom { start = 0, end = 5 });
+                    this.dataZoom.Add(new DataZoom { start = 0, end = 5 });
 
                     //increments of each
                     var hourcounter = 1;
@@ -140,8 +140,8 @@ namespace EchartsWebForms.Charts
                     break;
 
                 case "15MIN":
-                    model.dataZoom.Add(new DataZoom { type = "inside", start = 0, end = 5, zoomOnMouseWheel = "ctrl" });
-                    model.dataZoom.Add(new DataZoom { start = 0, end = 5 });
+                    this.dataZoom.Add(new DataZoom { type = "inside", start = 0, end = 5, zoomOnMouseWheel = "ctrl" });
+                    this.dataZoom.Add(new DataZoom { start = 0, end = 5 });
                     hourcounter = 1;
                     daycounter = 0;
                     mincounter = 15;
@@ -186,9 +186,9 @@ namespace EchartsWebForms.Charts
                     
                     break;
                 case "DAILY":
-                    model.dataZoom.Add(
+                    this.dataZoom.Add(
                         new DataZoom { type = "inside", start = 0, end = 100, zoomOnMouseWheel = "ctrl" });
-                    model.dataZoom.Add(new DataZoom { start = 0, end = 100 });
+                    this.dataZoom.Add(new DataZoom { start = 0, end = 100 });
 
                     daycounter = 0;
 
@@ -247,7 +247,7 @@ namespace EchartsWebForms.Charts
                     break;
             }
 
-            model.xAxis.Add(new XAxis
+            this.xAxis.Add(new XAxis
             {
                 type = "category",
                 boundaryGap = false,
@@ -255,7 +255,7 @@ namespace EchartsWebForms.Charts
                 show = showXAxis
             });
 
-            model.yAxis.Add(new YAxis
+            this.yAxis.Add(new YAxis
             {
                 type = "value"
             });
@@ -270,7 +270,7 @@ namespace EchartsWebForms.Charts
                 //unionAddData.Add(random.Next(1, 1500));
             }
 
-            model.series.Add(new Series
+            this.series.Add(new Series
             {
                 name = "Email",
                 type = "line",

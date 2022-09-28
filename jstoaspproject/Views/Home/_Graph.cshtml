@@ -1,0 +1,43 @@
+﻿@using Microsoft.AspNetCore.Html
+@using System.Web
+@model GraphModel
+     
+        @*//based on the freqopt the all the graphs change. have to change what graphs show up*@
+        @*if price show these graphs if lse show the other cuz interval adjusted by case statements
+            s*@
+@*// usechartid*@
+<div id="@Model.ChartId"
+     class="container" 
+     style="width: 100%; height: 100%; overflow-x: scroll"></div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+
+
+    <script>function createChart(divId) {
+    console.log({ echarts: echarts });
+            var myChart = echarts.init(document.getElementById(divId));
+            var app = {};
+
+    var option = @Model.GraphOptions;
+    //creates our object of echarts root called model and uses the other class(es)
+    //to create functionality
+
+
+    console.log({ option:option })
+            // option gets repelace wil the serrialzied classe from c# passed to the view from the controller
+            // and the model type is html string meanin the srerialzed json is ready to be used as normal json
+
+            if (option && typeof option === "object") {
+                myChart.setOption(option);
+            }
+        }
+
+        createChart("@Model.ChartId");
+        //chartid set in _graph.cshtml atModel.ChartId cuz chartid is variable
+         //of graphmodel object gmodel
+
+          
+    </script>

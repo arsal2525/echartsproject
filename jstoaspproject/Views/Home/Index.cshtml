@@ -1,0 +1,297 @@
+﻿@using Microsoft.AspNetCore.Html
+@using System.Web
+@model HtmlString
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<p id="demo"></p>
+
+<label for="interval">Choose an interval:</label>
+
+<select id="interval">
+    <option value="5MIN">5-min</option>
+    <option value="15MIN">15-min</option>
+    <option value="Daily">Daily</option>
+    
+</select>
+
+<label for="purpose">Choose an option:</label>
+<select id="purpose">
+    
+    <option value="Price">Price</option>
+    <option value="LSELoad">LSE Load</option>
+</select>
+<br />
+
+<input type="text" name="startDate" id="startDate" data-mask="99/99/9999" value="@DateTime.Now.ToShortDateString()" />
+
+@Html.TextBox("StartDate", DateTime.Now.ToShortDateString(), new {@class="form-control", @data_mask="99/99/9999" })
+<br />
+
+
+
+<input type="text" name="endDate" id="endDate" data-mask="99/99/9999" value="@DateTime.Now.AddDays(5).ToShortDateString()" />
+
+
+
+
+
+<div id="partialchart">
+
+    <div class="charts-parent">
+        
+        <div id="Graph1" style="background:red;">
+
+        </div>
+        <div id="Graph2">
+
+        </div>
+        <div id="Graph3">
+
+        </div>
+
+        <div id="Graph4">
+        </div>
+
+        <div id="Graph5">
+
+        </div>
+        <div id="Graph6">
+
+        </div>
+    </div>
+
+
+    <div class="charts-parent-lse">
+        <div id="Graph7">
+
+        </div>
+        <div id="Graph8">
+
+
+        </div>
+        <div id="Graph9">
+
+        </div>
+        <div id="Graph10">
+
+
+        </div>
+        <div id="Graph11">
+        </div>
+        <div id="Graph12">
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            $("#interval").on("change", function () {
+                // ajax call
+                console.log("changetrigger")
+                // load smoothly without refresh
+                // vanilla js ajax call is very wordy
+
+                // specify url first
+                loadGrid();
+            });
+            loadGrid();
+
+            $("#interval").on("change", function () {
+                var interval = $(this).val();
+     
+
+                switch (interval) {
+                    case "5MIN":
+
+                        // so in 5 min for the interval case
+
+                        // for loop to popualte start min and end min by 5 min s i %5 == 0
+                        // use jqery to find how to change options in dropdown
+                        // build html stirng of options and ue %startmin.html
+                        console.log(interval);
+                      
+
+                        $("#lbl-end-mins").show();
+                        $("#lbl-end-hours").show();
+                        $("#end-mins").show();
+                        $("#end-hours").show();
+
+                        $("#lbl-start-mins").show();
+                        $("#lbl-start-hours").show();
+                        $("#start-mins").show();
+                        $("#start-hours").show();
+                        break;
+                    case "15MIN":
+                        // for loop to popualte start min and end min by 15 min s i %15 == 0
+
+                        $("#lbl-end-mins").show();
+                        $("#lbl-end-hours").show();
+                        $("#end-mins").show();
+                        $("#end-hours").show();
+
+                        $("#lbl-start-mins").show();
+                        $("#lbl-start-hours").show();
+                        $("#start-mins").show();
+                        $("#start-hours").show();
+                        break;
+                    case "Daily":
+                        $("#lbl-start-mins").hide();
+                        $("#lbl-start-hours").hide();
+                        $("#start-mins").hide();
+                        $("#start-hours").hide();
+
+                        $("#lbl-end-mins").hide();
+                        $("#lbl-end-hours").hide();
+                        $("#end-mins").hide();
+                        $("#end-hours").hide();
+                        break;
+
+                }
+            });
+
+            // triggering change event on load
+
+
+
+            const startDate = document.querySelector('#startDate');
+            const endDate = document.querySelector('#endDate');
+            const purpose = document.querySelector('#purpose');
+
+
+            purpose.addEventListener('change', (event) => {
+   
+                loadGrid();
+            });
+
+            startDate.addEventListener('change', (event) => {
+     
+                console.log("inside startdatechange");
+                loadGrid();
+
+            });
+            endDate.addEventListener('change', (event) => {
+       
+                console.log("inside enddatechange");
+                loadGrid();
+            });
+
+
+
+            // get varialbes tlike totalminutes or datediff from controller to here somehow
+
+        });
+
+        function loadGrid() {
+            // wrapper fucniton . fi want diffreent title need to treat grids as component
+            var purpose = $("#purpose").val();
+            console.log({ purpose: purpose });
+            switch (purpose) {
+                case "Price":
+                    @*$("#Graph7").hide();
+                    $("#Graph8").hide();
+                    $("#Graph9").hide();
+                    $("#Graph10").hide();
+                    $("#Graph11").hide();
+                    $("#Graph12").hide();
+
+                    $("#Graph1").show();
+                    $("#Graph2").show();
+                    $("#Graph3").show();
+                    $("#Graph4").show();
+                    $("#Graph5").show();
+                    $("#Graph6").show();*@
+
+                    $(".charts-parent").show();
+                    $(".charts-parent-lse").hide();
+
+
+                    getData("@Url.Action("LoadChart", "Home")", "container", "#chart-container1", "#option1-container", true);
+
+                    getData("@Url.Action("LoadChart", "Home")", "carData", "#chart-container", "#Graph1", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle2", "#chart-container2", "#Graph2", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle3", "#chart-container3", "#Graph3", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle4", "#chart-container4", "#Graph4", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle5", "#chart-container5", "#Graph5", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle6", "#chart-container6", "#Graph6", true);
+                    //getdata passes all the stuff we want for our charts into hc and loadchart action
+
+                    break;
+                case "LSELoad":
+
+                    $(".charts-parent").hide();
+                    $(".charts-parent-lse").show();
+                    @*$("#Graph1").hide();
+                    $("#Graph2").hide();
+                    $("#Graph3").hide();
+                    $("#Graph4").hide();
+                    $("#Graph5").hide();
+                    $("#Graph6").hide();*@
+
+                    @*$("#Graph7").show();
+                    $("#Graph8").show();
+                    $("#Graph9").show();
+                    $("#Graph10").show();
+                    $("#Graph11").show();
+                    $("#Graph12").show();*@
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle7", "#chart-container7", "#Graph7", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle8", "#chart-container8", "#Graph8", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle9", "#chart-container9", "#Graph9", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle10", "#chart-container10", "#Graph10", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle11", "#chart-container11", "#Graph11", false);
+                    getData("@Url.Action("LoadChart", "Home")", "chartTitle12", "#chart-container12", "#Graph12", true);
+
+
+                    break;
+            }
+
+        }
+        // made get data more generic ge data from diffreernt endpoints
+        // getting data andl oadign chart at once pass in chart id create unique cahrt id everytime get data is called
+        // if same chartid could be issues pass in id as chart id thats why added to grpah mdoel
+
+        function getData(url, chartTitle, chartId, chartContainerId, showXAxis) {
+            $.ajax({
+                // this fucnion gets the data from any action
+
+                url: url,
+             
+                // define the url in a better way
+
+                contentType: "application/html; charset=utf-8",
+                //passing back entire partial view usually will be application/json
+                type: "GET",
+                dataType: "html",
+                data: {
+                    //sends all of this
+
+                    freqopt: $("#interval").val(),
+                    dataContent: $("#purpose").val(),
+                    startDate: $("#startDate").val(),
+                    endDate: $("#endDate").val(),
+                    chartId: chartId,
+                    //created here set at bottom of loadchart action in hc from
+                    //GrahModel class object and the variable values it gets set from
+                    //the partial view html + index.cshtml id logic and hc logic
+
+                    chartTitle: chartTitle,
+                    showXAxis: showXAxis
+                    //last 2 set in getdata call
+
+                }
+               
+
+            }).done(function (data) {
+                $(chartContainerId).html(data);
+
+                //post has a body
+                // puts the partial in this div
+
+            })
+        }
+    </script>
+}

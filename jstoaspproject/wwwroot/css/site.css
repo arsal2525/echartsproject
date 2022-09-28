@@ -1,0 +1,45 @@
+﻿html {
+  font-size: 14px;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.charts-parent {
+   display:block;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    width:100%;
+}
+
+
+.charts-parent-lse {
+    display: block;
+    height: 100vh;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+}
+
+#5-i, #15-i {
+padding:0px;
+margin:0px;
+}
+
+.container {
+   margin-bottom:10px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}

@@ -187,6 +187,7 @@
     </Compile>
     <Compile Include="Controls\GraphUserControl.ascx.cs">
       <DependentUpon>GraphUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controls\GraphUserControl.ascx.designer.cs">
       <DependentUpon>GraphUserControl.ascx</DependentUpon>

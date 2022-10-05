@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="GraphProject._Default" %>
 
-<%@ Register Assembly="DevExpress.Web.Bootstrap.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.Web.Bootstrap" TagPrefix="dx" %>
+
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
@@ -36,35 +36,35 @@
 
 
             <div class="charts-parent" id="charts-parent">
-                <div id="Graph1" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph1" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph2" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph2" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph3" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
-                </div>
-
-                <div id="Graph4" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph3" class="container" style="width: 100%;height:200px;" >
                 </div>
 
-                <div id="Graph5" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph4" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph6" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+
+                <div id="Graph5" class="container" style="width: 100%;height:200px;" >
+                </div>
+                <div id="Graph6" class="container" style="width: 100%;height:200px;" >
                 </div>
             </div>
 
 
             <div class="charts-parent-lse" id="charts-parent-lse">
-                <div id="Graph7" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph7" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph8" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph8" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph9" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph9" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph10" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph10" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph11" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph11" class="container" style="width: 100%;height:200px;" >
                 </div>
-                <div id="Graph12" class="container" style="width: 100%;height:200px;" overflow-x: scroll">
+                <div id="Graph12" class="container" style="width: 100%;height:200px;" >
                 </div>
             </div>
 
@@ -184,6 +184,8 @@
 
             }
 
+            var allCharts = [];
+
             function getData(chartTitle, chartId, chartContainerId, showXAxis) {
                 debugger;
                 $.ajax({
@@ -220,7 +222,7 @@
                 myChart.setOption(option);
             }
         }
-</script>
+    </script>
 </asp:Content>
 
 

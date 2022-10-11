@@ -193,19 +193,9 @@
             });
 
             async function loadGridAsync() {
-                startDate.disabled = true;
-                endDate.disabled = true;
-                purpose.disabled = true;
-                mcInterval.disabled = true;
-
                 console.log("Initiate load grid promise");
                 await new Promise(loadGridPromiseExecutor);
                 console.log("Done with load grid promise");
-
-                startDate.disabled = false;
-                endDate.disabled = false;
-                purpose.disabled = false;
-                mcInterval.disabled = false;
             }
             
             function loadGridPromiseExecutor(resolutionFunc, rejectionFunc) {
